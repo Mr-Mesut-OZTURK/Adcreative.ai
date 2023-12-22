@@ -1,11 +1,13 @@
+import { RouterProvider } from "react-router-dom"
+import { router } from "@/routes"
 
 
 function App() {
 
   return (
-    <div className="bg-slate-600 text-red-500">
-      morty
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   )
 }
 
