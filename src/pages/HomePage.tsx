@@ -1,6 +1,7 @@
 import { useQuery, gql } from '@apollo/client';
 import { AutocompleteComponent } from '@/components'
 import { useEffect, useState } from 'react';
+import { Container, Link, Typography } from '@mui/material';
 
 const GET_CHARACTERS = gql`
   query Characters($page: Int, $filter: FilterCharacter) {
@@ -49,11 +50,34 @@ export const HomePage = () => {
 
   return (
     <div className='p-5'>
-      <AutocompleteComponent
-        data={data?.characters?.results}
-        setVariables={setVariables}
-        loading={loading}
-      />
+
+
+      <Container maxWidth="xl" >
+        <Typography
+          sx={{
+            textDecoration: "none",
+            mb: 2,
+          }}
+        >
+          Proje linkedin
+          <Link
+            href="https://www.linkedin.com/jobs/view/3789638519/"
+            sx={{
+              textDecoration: "none",
+              color: 'blue',
+              ml: '3px'
+            }}
+          >
+            link
+          </Link>
+        </Typography>
+
+        <AutocompleteComponent
+          data={data?.characters?.results}
+          setVariables={setVariables}
+          loading={loading}
+        />
+      </Container>
     </div>
   )
 }

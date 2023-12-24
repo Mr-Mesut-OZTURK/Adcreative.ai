@@ -7,6 +7,7 @@ import { TextField, Autocomplete, Grid, Typography, Checkbox, CircularProgress, 
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { CloseRounded } from '@mui/icons-material';
 
 
 
@@ -47,7 +48,11 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
   }, [inputValue, setVariables])
 
 
-
+  // const handleDeleteItemFromSelected = (item: IDataItem) => {
+  //   console.log({ item });
+  //   const newItems = selectedOptions.filter(selected => selected.id !== item.id)
+  //   setSelectedOptions(newItems)
+  // }
 
   return (
     <Autocomplete
@@ -57,6 +62,7 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
       isOptionEqualToValue={(option: IDataItem, value: IDataItem) => option.name === value.name}
       disableCloseOnSelect
 
+      value={selectedOptions}
       onChange={(_, newValue: IDataItem[]) => {
         console.log(newValue);
         setSelectedOptions(newValue);
@@ -72,6 +78,8 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
           {...params}
           placeholder="Fins your charecter(s)"
           fullWidth
+          onKeyDown={(e) => console.log({ e })
+          }
           InputProps={{
             ...params.InputProps,
             endAdornment: (
@@ -80,12 +88,11 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
               </InputAdornment>
             )
           }}
-
         />
       )}
 
 
-      renderTags={(values) => {
+      renderTags={(tagValue, getTagProps) => {
 
         return (
           <Box
@@ -95,25 +102,44 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
             }}
           >
             {
-              values.map(item => {
+              tagValue.map((item, index) => {
 
                 return (
                   <Typography
+                    {...getTagProps({ index })}
                     key={item.id}
-
                     sx={{
                       borderRadius: "15px",
                       backgroundColor: '#e2e8f0',
                       p: 1,
-                      color: '#334155'
+                      color: '#334155',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 1
+
                     }}
                   >
                     {item.name}
+                    <Box
+                      sx={{
+                        borderRadius: '5px',
+                        bgcolor: '#aaa',
+                        width: 20,
+                        height: 20,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CloseRounded sx={{ color: '#666' }}
+                      />
+                    </Box>
                   </Typography>
                 )
               })
             }
-          </Box>
+          </Box >
         )
       }}
 

@@ -17,6 +17,17 @@ const theme = createTheme({
     },
 
     components: {
+        MuiChip: {
+            styleOverrides: {
+                root: () => {
+                    return ({
+                        borderRadius: '10px',
+                        backgroundColor: '#e2e8f0',
+                    })
+                },
+
+            }
+        },
         MuiCheckbox: {
             styleOverrides: {
                 root: () => {
