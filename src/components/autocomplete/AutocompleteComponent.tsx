@@ -48,11 +48,11 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
   }, [inputValue, setVariables])
 
 
-  // const handleDeleteItemFromSelected = (item: IDataItem) => {
-  //   console.log({ item });
-  //   const newItems = selectedOptions.filter(selected => selected.id !== item.id)
-  //   setSelectedOptions(newItems)
-  // }
+  const handleDeleteItemFromSelected = (item: IDataItem) => {
+    console.log({ item });
+    const newItems = selectedOptions.filter(selected => selected.id !== item.id)
+    setSelectedOptions(newItems)
+  }
 
   return (
     <Autocomplete
@@ -122,6 +122,7 @@ export const AutocompleteComponent = ({ data, setVariables, loading }: IProps) =
                   >
                     {item.name}
                     <Box
+                      onClick={() => handleDeleteItemFromSelected(item)}
                       sx={{
                         borderRadius: '5px',
                         bgcolor: '#aaa',
